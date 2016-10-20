@@ -12,7 +12,7 @@ public class LongestSubstring {
     }
 
     public int lengthOfLongestSubstring(String s) {
-        Set<Character> charSet = new HashSet<>();
+        Set<Character> charSet = new HashSet<Character>();
 
         char[] sChar = s.toCharArray();
         int maxLength = 0;
@@ -35,7 +35,7 @@ public class LongestSubstring {
     }
 
     public int otherMethod(String s){
-        Set<Character> charSet = new HashSet<>();
+        Set<Character> charSet = new HashSet<Character>();
 
         char[] sChar = s.toCharArray();
         int maxLength = 0;
