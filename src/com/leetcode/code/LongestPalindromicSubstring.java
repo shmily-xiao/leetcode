@@ -43,7 +43,6 @@ public class LongestPalindromicSubstring {
 //        System.out.println(palindromicSubstring.compareString(aaa,bbb));
 
     }
-
     public String longestPalindrome(String s) {
 
         String palindrome = "";
@@ -70,12 +69,12 @@ public class LongestPalindromicSubstring {
      */
     public Boolean isPalindromeString(String s){
         int length = s.length();
-        char[] charS = s.toCharArray();
+//        char[] charS = s.toCharArray();
 
         if (length<2) return Boolean.TRUE;
-        for (int i =0,j=length-1;   i<length || j >= 0;  i++,j--) {
+        for (int i =0,j=length-1; i<length || j >= 0;  i++,j--) {
             if (i >= j) break;
-            if (charS[i] != charS[j]) {
+            if (!s.substring(i,i+1).equals(s.substring(j,j+1))){
                 return Boolean.FALSE;
             }
         }
