@@ -32,6 +32,11 @@ public class LongestPalindromicSubstring {
 //        System.out.println(s.substring(s.length()/2,s.length()));
 //        System.out.println(s.substring(s.length()/2 + 1,s.length()));
 
+//
+//        String aaa = "123456";
+//        String bbb = "654321";
+//        System.out.println(palindromicSubstring.compareString(aaa,bbb));
+
     }
 
     public String longestPalindrome(String s) {
@@ -61,26 +66,53 @@ public class LongestPalindromicSubstring {
      * @return
      */
     public Boolean isPalindromeString(String s){
-
+        Long start = System.currentTimeMillis();
         int length = s.length();
+        int halfLength = length/2;
 
         if (length<2) return Boolean.TRUE;
         if (length%2 == 0){
-            String preString = s.substring(0,length/2);
-            if (this.reverseString(preString).equals(s.substring(length/2,length))){
+            String preString = s.substring(0,halfLength);
+            String postString = s.substring(halfLength,length);
+//            if (this.reverseString(preString).equals(postString)){
+            if (this.compareString(preString,postString)){
+
+                Long endTime = System.currentTimeMillis();
+                time = time + (endTime-start);
                 return Boolean.TRUE;
             }else {
+                Long endTime = System.currentTimeMillis();
+                time = time + (endTime-start);
                 return Boolean.FALSE;
             }
         }else {
-            String preString = s.substring(0,length/2);
-            String postString = s.substring(length/2+1,length);
-            if (this.reverseString(preString).equals(postString)){
+            String preString = s.substring(0,halfLength);
+            String postString = s.substring(halfLength+1,length);
+//            if (this.reverseString(preString).equals(postString)){
+            if (this.compareString(preString,postString)){
+
+                Long endTime = System.currentTimeMillis();
+                time = time + (endTime-start);
                 return Boolean.TRUE;
             }else {
+                Long endTime = System.currentTimeMillis();
+                time = time + (endTime-start);
                 return Boolean.FALSE;
             }
         }
+    }
+
+    public Boolean compareString(String stringA, String stringB){
+        int length = stringA.length();
+        if (length != stringB.length()) return Boolean.FALSE;
+        char[] charA = stringA.toCharArray();
+        char[] charB = stringB.toCharArray();
+        for (int i =0,j=length-1;   i<length ||j >=0;  i++,j--){
+            if (charA[i] != charB[j]){
+                return Boolean.FALSE;
+            }
+        }
+        return Boolean.TRUE;
     }
 
 
@@ -90,7 +122,7 @@ public class LongestPalindromicSubstring {
      * @return
      */
     public String reverseString(String s){
-//        Long start = System.currentTimeMillis();
+        Long start = System.currentTimeMillis();
         // method 1
 //        if (s.isEmpty() || s.length() <= 1) return s;
 //        char[] chars = s.toCharArray();
@@ -114,8 +146,8 @@ public class LongestPalindromicSubstring {
 //            begin++;
 //            end--;
 //        }
-//        Long endTime = System.currentTimeMillis();
-//        time = time + (endTime-start);
+        Long endTime = System.currentTimeMillis();
+        time = time + (endTime-start);
 //        return new String(str);
         return result;
     }
