@@ -43,11 +43,14 @@ public class StringToInteger {
             length = length-1; // 去掉符号的占位
         }
         length = length-1; // 十进制去掉1
+        if (length > (Integer.MAX_VALUE+"").length()){
+            return Integer.MAX_VALUE;
+        }
         for (; i < numChar.length; i++){
             if (numChar[i]<'0'||numChar[i]>'9'){
                 break;
             }
-            if (this.power(10L,Long.parseLong(length+"")) > Long.MAX_VALUE){
+            if (this.power(10L,Long.parseLong(length+"")) > Integer.MAX_VALUE){
                 return Integer.MAX_VALUE;
             }
             resultNum = Long.parseLong(numChar[i]+"")*this.power(10L,Long.parseLong(length+"")) + resultNum;
