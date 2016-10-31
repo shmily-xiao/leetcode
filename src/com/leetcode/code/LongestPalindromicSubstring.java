@@ -46,25 +46,47 @@ public class LongestPalindromicSubstring {
 //        System.out.println(palindromicSubstring.compareString(aaa,bbb));
 
     }
+//    public String longestPalindrome(String s) {
+//        String palindrome = "";
+//        if (s.length()<=1){
+//            return s;
+//        }
+//        String reversedString = new StringBuilder(s).reverse().toString();
+//        int length = s.length();
+//        for (int i = 0; i < length; i++){
+//            for (int j = i+1;j<= length;j++){
+//                String compareString = s.substring(i,j);
+//                if (compareString.equals(reversedString.substring(length-j,length-i))){
+//                    if ((j-i)>palindrome.length()) {
+//                        palindrome = compareString;
+//                    }
+//                }
+//            }
+//        }
+//
+//        return palindrome;
+//    }
     public String longestPalindrome(String s) {
-        String palindrome = "";
-        if (s.length()<=1){
-            return s;
-        }
-        String reversedString = new StringBuilder(s).reverse().toString();
-        int length = s.length();
-        for (int i = 0; i < length; i++){
-            for (int j = i+1;j<= length;j++){
-                String compareString = s.substring(i,j);
-                if (compareString.equals(reversedString.substring(length-j,length-i))){
-                    if ((j-i)>palindrome.length()) {
-                        palindrome = compareString;
-                    }
-                }
+        int start = 0, end = 0;
+        for (int i = 0; i < s.length(); i++) {
+            int len1 = expandAroundCenter(s, i, i);
+            int len2 = expandAroundCenter(s, i, i + 1);
+            int len = Math.max(len1, len2);
+            if (len > end - start) {
+                start = i - (len - 1) / 2;
+                end = i + len / 2;
             }
         }
+        return s.substring(start, end + 1);
+    }
 
-        return palindrome;
+    private int expandAroundCenter(String s, int left, int right) {
+        int L = left, R = right;
+        while (L >= 0 && R < s.length() && s.charAt(L) == s.charAt(R)) {
+            L--;
+            R++;
+        }
+        return R - L - 1;
     }
     /**
      * 判断字符串是不是回文
