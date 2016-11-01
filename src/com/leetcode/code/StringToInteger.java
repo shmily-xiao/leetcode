@@ -14,6 +14,10 @@ package com.leetcode.code;
  * "2147483648"            2147483647
  * "18446744073709551617"  1
  *
+ * " b11228552307"         0
+ * "-9223372036854775809"  -2147483648
+ *
+ * "         -10988856719a"  time limited
  */
 public class StringToInteger {
     public int myAtoi(String str) {
@@ -42,10 +46,16 @@ public class StringToInteger {
             i = i+1;
             length = length-1; // 去掉符号的占位
         }
-        length = length-1; // 十进制去掉1
-        if (length > (Integer.MAX_VALUE+"").length()){
+
+        if (!isNegative && length > (Integer.MAX_VALUE+"").length()){
             return Integer.MAX_VALUE;
         }
+        if (isNegative && length > "2147483648".length()){
+            return Integer.MIN_VALUE;
+        }
+
+        length = length-1; // 十进制去掉1
+
         for (; i < numChar.length; i++){
             if (numChar[i]<'0'||numChar[i]>'9'){
                 break;
@@ -107,6 +117,9 @@ public class StringToInteger {
         if (result.charAt(0)=='+'){
             result = result.substring(1);
         }
+        if (numChar[0]!=' '&&numChar[0]!='+'&&numChar[0]!='-'&&(numChar[0]<'0'||numChar[0]>'9')){
+            return "";
+        }
 
         return result;
     }
@@ -135,7 +148,7 @@ public class StringToInteger {
     public static void main(String[] args) {
         StringToInteger stringToInteger = new StringToInteger();
 
-        String input = "18446744073709551617";//"  -001 2a42"; // "   +0 123"
+        String input = "         -10988856719a";//"  -001 2a42"; // "   +0 123"
         System.out.println(input);
         System.out.println(stringToInteger.myAtoi(input));
 
